@@ -1,0 +1,9 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - zip app.zip index.py
+      - aws cloudformation package --template-file template.yaml --output-template-file serverless-output.yaml --s3-bucket $BUCKET
+      - aws cloudformation deploy --template-file serverless-output.yaml --stack-name  $STACK --capabilities CAPABILITY_IAM
+
+
